@@ -37,36 +37,27 @@ CREATE TABLE `subtemas` (
 `descripcion` varchar(120) NULL,
 PRIMARY KEY (`id`, `id_tema`, `nrc`) 
 );
-CREATE TABLE `componentes` (
-`id` varchar(10) NOT NULL,
-`nrc` varchar(20) NOT NULL,
-`id_tema` varchar(10) NOT NULL,
-`semana_inicio` varchar(10) NOT NULL,
-`semana_fin` varchar(10) NOT NULL,
-`id_periodo` varchar(10) NOT NULL,
-PRIMARY KEY (`id`, `nrc`, `id_tema`) 
-);
 CREATE TABLE `actividades` (
 `id_actividad` varchar(10) NOT NULL,
 `nrc` varchar(20) NOT NULL,
-`id_tema` varchar(10) NULL,
+`id_tema` varchar(10) NOT NULL,
 `tipo` varchar(20) NOT NULL,
 `descripcion` varchar(255) NULL,
 `plataforma` varchar(255) NULL,
 `recurso` varchar(255) NULL,
 `frecuencia` varchar(255) NULL,
-PRIMARY KEY (`id_actividad`) 
+PRIMARY KEY (`id_actividad`, `nrc`, `id_tema`) 
 );
 CREATE TABLE `evaluaciones` (
 `id` varchar(10) NOT NULL,
-`nrc` varchar(20) NULL,
-`id_tema` varchar(10) NULL,
+`nrc` varchar(20) NOT NULL,
+`id_tema` varchar(10) NOT NULL,
 `descripcion` varchar(120) NULL,
 `ponderacion` int NULL,
 `id_periodo` varchar(10) NULL,
 `numero_semana` int NULL,
 `fecha` date NULL,
-PRIMARY KEY (`id`) 
+PRIMARY KEY (`id`, `nrc`, `id_tema`) 
 );
 CREATE TABLE `competencias` (
 `id` varchar(10) NOT NULL,
@@ -134,17 +125,21 @@ CREATE TABLE `asistencias` (
 `asistente` tinyint NULL,
 PRIMARY KEY (`nrc`, `id_usuario`, `id_periodo`, `numero_semana`, `fecha`) 
 );
+CREATE TABLE `evualuaciones_usuarios` (
+`id_evaluacion` varchar(10) NOT NULL,
+`nrc` varchar(20) NOT NULL,
+`id_tema` varchar(10) NOT NULL,
+`id_usuario` varchar(10) NOT NULL,
+`nota` int NULL,
+PRIMARY KEY (`id_evaluacion`, `nrc`, `id_tema`, `id_usuario`) 
+);
 
 ALTER TABLE `carreras_asignaturas` ADD CONSTRAINT `cacarreras` FOREIGN KEY (`id_carrera`) REFERENCES `carreras` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `carreras_asignaturas` ADD CONSTRAINT `caasignaturas` FOREIGN KEY (`nrc`) REFERENCES `asignaturas` (`nrc`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `temas` ADD CONSTRAINT `temasasignatura` FOREIGN KEY (`nrc`) REFERENCES `asignaturas` (`nrc`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `subtemas` ADD CONSTRAINT `subtemastemas` FOREIGN KEY (`id_tema`, `nrc`) REFERENCES `temas` (`id`, `nrc`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `criterios` ADD CONSTRAINT `crieterioscompetencias` FOREIGN KEY (`id_competencia`) REFERENCES `competencias` () ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `criterios` ADD CONSTRAINT `crieterioscompetencias` FOREIGN KEY (`id_competencia`) REFERENCES `competencias` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `semanas` ADD CONSTRAINT `semanasperiodo` FOREIGN KEY (`id_periodo`) REFERENCES `periodos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `componentes` ADD CONSTRAINT `componentefechainicio` FOREIGN KEY (`semana_inicio`, `id_periodo`) REFERENCES `semanas` (`id_periodo`, `numero`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `componentes` ADD CONSTRAINT `componentefechafin` FOREIGN KEY (`semana_fin`, `id_periodo`) REFERENCES `semanas` (`id_periodo`, `numero`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `componentes` ADD CONSTRAINT `componentesasignatura` FOREIGN KEY (`nrc`) REFERENCES `asignaturas` (`nrc`) ON DELETE CASCADE ON UPDATE CASCADE;
-ALTER TABLE `componentes` ADD CONSTRAINT `componentestemas` FOREIGN KEY (`nrc`, `id_tema`) REFERENCES `temas` (`id`, `nrc`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `actividades` ADD CONSTRAINT `actividadestema` FOREIGN KEY (`nrc`, `id_tema`) REFERENCES `temas` (`id`, `nrc`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `evaluaciones` ADD CONSTRAINT `evualuaciontema` FOREIGN KEY (`nrc`, `id_tema`) REFERENCES `temas` (`id`, `nrc`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `evaluaciones` ADD CONSTRAINT `evaluacionsemana` FOREIGN KEY (`id_periodo`, `numero_semana`) REFERENCES `semanas` (`id_periodo`, `numero`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -159,4 +154,6 @@ ALTER TABLE `usuarios_asignaturas` ADD CONSTRAINT `uausuario` FOREIGN KEY (`id_u
 ALTER TABLE `asistencias` ADD CONSTRAINT `asistenciasusuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `asistencias` ADD CONSTRAINT `asistenciasasignatura` FOREIGN KEY (`nrc`) REFERENCES `asignaturas` (`nrc`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `asistencias` ADD CONSTRAINT `asistenciassemanas` FOREIGN KEY (`id_periodo`, `numero_semana`) REFERENCES `semanas` (`id_periodo`, `numero`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `evualuaciones_usuarios` ADD CONSTRAINT `euusuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `evualuaciones_usuarios` ADD CONSTRAINT `euevaluaciones` FOREIGN KEY (`id_evaluacion`, `nrc`, `id_tema`) REFERENCES `evaluaciones` (`id`, `nrc`, `id_tema`) ON DELETE CASCADE ON UPDATE CASCADE;
 

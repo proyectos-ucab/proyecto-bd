@@ -59,14 +59,14 @@ PRIMARY KEY (`id_actividad`)
 );
 CREATE TABLE `evaluaciones` (
 `id` varchar(10) NOT NULL,
-`nrc` varchar(20) NULL,
-`id_tema` varchar(10) NULL,
+`nrc` varchar(20) NOT NULL,
+`id_tema` varchar(10) NOT NULL,
 `descripcion` varchar(120) NULL,
 `ponderacion` int NULL,
 `id_periodo` varchar(10) NULL,
 `numero_semana` int NULL,
 `fecha` date NULL,
-PRIMARY KEY (`id`) 
+PRIMARY KEY (`id`, `nrc`, `id_tema`) 
 );
 CREATE TABLE `competencias` (
 `id` varchar(10) NOT NULL,
@@ -134,6 +134,14 @@ CREATE TABLE `asistencias` (
 `asistente` tinyint NULL,
 PRIMARY KEY (`nrc`, `id_usuario`, `id_periodo`, `numero_semana`, `fecha`) 
 );
+CREATE TABLE `evualuaciones_usuarios` (
+`id_evaluacion` varchar(10) NOT NULL,
+`nrc` varchar(20) NOT NULL,
+`id_tema` varchar(10) NOT NULL,
+`id_usuario` varchar(10) NOT NULL,
+`nota` int NULL,
+PRIMARY KEY (`id_evaluacion`, `nrc`, `id_tema`, `id_usuario`) 
+);
 
 ALTER TABLE `carreras_asignaturas` ADD CONSTRAINT `cacarreras` FOREIGN KEY (`id_carrera`) REFERENCES `carreras` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `carreras_asignaturas` ADD CONSTRAINT `caasignaturas` FOREIGN KEY (`nrc`) REFERENCES `asignaturas` (`nrc`) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -159,4 +167,6 @@ ALTER TABLE `usuarios_asignaturas` ADD CONSTRAINT `uausuario` FOREIGN KEY (`id_u
 ALTER TABLE `asistencias` ADD CONSTRAINT `asistenciasusuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `asistencias` ADD CONSTRAINT `asistenciasasignatura` FOREIGN KEY (`nrc`) REFERENCES `asignaturas` (`nrc`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `asistencias` ADD CONSTRAINT `asistenciassemanas` FOREIGN KEY (`id_periodo`, `numero_semana`) REFERENCES `semanas` (`id_periodo`, `numero`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `evualuaciones_usuarios` ADD CONSTRAINT `euusuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `evualuaciones_usuarios` ADD CONSTRAINT `euevaluaciones` FOREIGN KEY (`id_evaluacion`, `nrc`, `id_tema`) REFERENCES `evaluaciones` (`id`, `nrc`, `id_tema`) ON DELETE CASCADE ON UPDATE CASCADE;
 
