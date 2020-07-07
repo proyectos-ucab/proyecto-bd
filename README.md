@@ -9,6 +9,8 @@
 
 ![Modelo Logico](./archivos/modelo-logico.png)
 
+### En la carpeta `Archivos` Se encuentra el informe de la primera entrega
+
 ## Grafo Relacional de la base de datos
 
 ![Grafo Relacional](./archivos/imagenes/grafo_relacional.png)
