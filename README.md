@@ -5,6 +5,8 @@
 - Felix Lopez, CI: 26649762
 - Andrea Torres, CI: 26939783
 
+### En la carpeta `Archivos` Se encuentra el informe de la primera entrega
+
 ## Grafo Relacional de la base de datos
 
 ![Grafo Relacional](./archivos/imagenes/grafo_relacional.png)
