@@ -62,7 +62,7 @@ CREATE TABLE `evaluaciones` (
 `nrc` varchar(20) NOT NULL,
 `id_tema` varchar(10) NOT NULL,
 `descripcion` varchar(120) NULL,
-`ponderacion` int NULL,
+`ponderacion` float NULL,
 `id_periodo` varchar(10) NULL,
 `numero_semana` int NULL,
 `fecha` date NULL,
@@ -169,4 +169,83 @@ ALTER TABLE `asistencias` ADD CONSTRAINT `asistenciasasignatura` FOREIGN KEY (`n
 ALTER TABLE `asistencias` ADD CONSTRAINT `asistenciassemanas` FOREIGN KEY (`id_periodo`, `numero_semana`) REFERENCES `semanas` (`id_periodo`, `numero`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `evualuaciones_usuarios` ADD CONSTRAINT `euusuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE `evualuaciones_usuarios` ADD CONSTRAINT `euevaluaciones` FOREIGN KEY (`id_evaluacion`, `nrc`, `id_tema`) REFERENCES `evaluaciones` (`id`, `nrc`, `id_tema`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+INSERT INTO usuarios (id, nombre, correo , tipo, `password` )
+VALUES 
+('71G20cf0-8', 'Felix Lopez', 'felix@est.ucab.edu.ve', 'estudiante', '1234');
+INSERT INTO usuarios (id, nombre, correo , tipo, `password` )
+VALUES 
+('71G21cf0-8', 'Andrea Torres', 'andrea@est.ucab.edu.ve', 'estudiante', '1234');
+INSERT INTO usuarios (id, nombre, correo , tipo, `password` )
+VALUES 
+('71G10cf0-8', 'Oriana Renaud', 'oriana@ucab.edu.ve', 'profesor', '1234');
+INSERT INTO usuarios (id, nombre, correo , tipo, `password` )
+VALUES 
+('71G104f0-8', 'Jesus Gonzalez', 'jesus@ucab.edu.ve', 'profesor', '1234');
+
+
+
+-- INSERTAR EN TEMAS
+INSERT INTO temas (id, nrc, nombre, ponderacion)
+VALUES ('7fe0cf30-8', '25328', 'Concepción de Sistemas', NULL);
+INSERT INTO temas (id, nrc, nombre, ponderacion)
+VALUES ('7fe2cf30-8', '25328', 'Sistemas Informáticos', NULL);
+INSERT INTO temas (id, nrc, nombre, ponderacion)
+VALUES ('7fe4cf30-8', '25328', ' El Proceso de Desarrollo de Software', NULL);
+INSERT INTO temas (id, nrc, nombre, ponderacion)
+VALUES ('7fe5cf30-8', '25328', 'Metodologías para el Desarrollo de Software', NULL);
+INSERT INTO temas (id, nrc, nombre, ponderacion)
+VALUES ('7fe7cf30-8', '25328', 'Inicio del Proyecto', NULL);
+INSERT INTO temas (id, nrc, nombre, ponderacion)
+VALUES ('7fe1cf30-8', '25328', 'Análisis', NULL);
+INSERT INTO temas (id, nrc, nombre, ponderacion)
+VALUES ('7fe1cf30-8', '25328', 'Diseño Global', NULL);
+
+-- TEMA 1 METODOLOGIA DEL SOFTWARE
+INSERT INTO subtemas (id, id_tema, nrc, nombre, descripcion)
+VALUES ( 
+  '39477e86-6',
+  '7fe0cf30-8',
+  '25328',
+  'Componentes de un sistema', 
+  NULL );
+INSERT INTO subtemas (id, id_tema, nrc, nombre, descripcion)
+VALUES ( 
+  '39477e16-6',
+  '7fe0cf30-8',
+  '25328',
+  'Sistemas abiertas y cerrados', 
+  NULL );
+INSERT INTO subtemas (id, id_tema, nrc, nombre, descripcion)
+VALUES ( 
+  '39477e36-6',
+  '7fe0cf30-8',
+  '25328',
+  'Control y retroalimentación', 
+  NULL );
+
+-- TEMA 2 METODOLOGIA DEL SOFTWARE
+INSERT INTO subtemas (id, id_tema, nrc, nombre, descripcion)
+VALUES ( 
+  '199b34b4-2',
+  '7fe2cf30-8',
+  '25328',
+  'Control y retroalimentación', 
+  NULL );
+INSERT INTO subtemas (id, id_tema, nrc, nombre, descripcion)
+VALUES ( 
+  '299b34b4-2',
+  '7fe2cf30-8',
+  '25328',
+  'Control y retroalimentación', 
+  NULL );
+INSERT INTO subtemas (id, id_tema, nrc, nombre, descripcion)
+VALUES ( 
+  '399b34b4-2',
+  '7fe2cf30-8',
+  '25328',
+  'Control y retroalimentación', 
+  NULL );
+
 
