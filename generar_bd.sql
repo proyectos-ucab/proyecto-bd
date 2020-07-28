@@ -3,8 +3,8 @@
 CREATE TABLE `usuario` (
 `cedula` int(10) NOT NULL,
 `nombre` varchar(30) NOT NULL,
-`correo` varchar(25) NOT NULL,
-`password` varchar(25) NOT NULL, 
+`correo` varchar(255) NOT NULL,
+`password` varchar(255) NOT NULL, 
 PRIMARY KEY (`cedula`) 
 );
 
