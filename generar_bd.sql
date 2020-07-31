@@ -1,5 +1,9 @@
 -- BD Grupo Uno
 
+SET FOREIGN_KEY_CHECKS=0;
+
+DROP TABLE IF EXISTS `usuario`;
+
 CREATE TABLE IF NOT EXISTS `usuario` (
 `cedula` int(10) NOT NULL,
 `nombre` varchar(30) NOT NULL,
@@ -11,7 +15,8 @@ UNIQUE (`correo`)
 );
 
 
-CREATE TABLE IF NO EXISTS`periodo` (
+DROP TABLE IF EXISTS `periodo`;
+CREATE TABLE IF NOT EXISTS `periodo` (
 `id` int(6) NOT NULL,
 `nombre` varchar(25) NOT NULL,
 `fecha_inicio` date NOT NULL,
@@ -19,7 +24,8 @@ CREATE TABLE IF NO EXISTS`periodo` (
 PRIMARY KEY (`id`) 
 );
 
-CREATE TABLE IF NO EXISTS`semana` (
+DROP TABLE IF EXISTS `semana` ;
+CREATE TABLE IF NOT EXISTS `semana` (
 `numero` int(2) NOT NULL,
 `id_periodo` int(6) NOT NULL,
 `fecha_inicio` date NOT NULL,
@@ -29,14 +35,16 @@ PRIMARY KEY (`numero`, `id_periodo`),
 FOREIGN KEY ( `id_periodo` ) REFERENCES `periodo` ( `id` ) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NO EXISTS`carrera` (
+DROP TABLE IF EXISTS `carrera`;
+CREATE TABLE IF NOT EXISTS `carrera` (
 `id` int(6) NOT NULL,
 `nombre` varchar(30) NOT NULL,
 `descripcion` text NOT NULL,
 PRIMARY KEY (`id`) 
 );
 
-CREATE TABLE IF NO EXISTS`asignatura` (
+DROP TABLE IF EXISTS `asignatura` ;
+CREATE TABLE IF NOT EXISTS `asignatura` (
 `nrc` integer(6) NOT NULL,
 `nombre` varchar(150) NOT NULL,
 `descripcion` varchar(50) NOT NULL,
@@ -49,7 +57,8 @@ CREATE TABLE IF NO EXISTS`asignatura` (
 PRIMARY KEY (`nrc`) 
 );
 
-CREATE TABLE IF NO EXISTS`carrera_asignatura` (
+DROP TABLE IF EXISTS `carrera_asignatura` ;
+CREATE TABLE IF NOT EXISTS `carrera_asignatura` (
 `id_carrera` integer(6) NOT NULL,
 `nrc_asignatura` integer(6) NOT NULL,
 PRIMARY KEY (`id_carrera`, `nrc_asignatura`),
@@ -59,7 +68,8 @@ FOREIGN KEY ( `nrc_asignatura` ) REFERENCES `asignatura` ( `nrc` ) ON DELETE CAS
 
 );
 
-CREATE TABLE IF NO EXISTS`tema` (
+DROP TABLE IF EXISTS `tema` ;
+CREATE TABLE IF NOT EXISTS `tema` (
 `id` int(6) NOT NULL,
 `nrc_asignatura` int(6) NOT NULL,
 `nombre` varchar(60) NOT NULL,
@@ -69,7 +79,8 @@ PRIMARY KEY (`id`),
 FOREIGN KEY ( `nrc_asignatura` ) REFERENCES `asignatura` ( `nrc` ) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NO EXISTS`subtema` (
+DROP TABLE IF EXISTS `subtema`;
+CREATE TABLE IF NOT EXISTS `subtema` (
 `id` integer(6) NOT NULL,
 `id_tema` integer(6) NOT NULL,
 `numero` integer(3) NOT NULL,
@@ -79,7 +90,8 @@ PRIMARY KEY (`id`, `id_tema`),
 FOREIGN KEY ( `id_tema` ) REFERENCES `tema` ( `id` ) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NO EXISTS`subtema_subtema` (
+DROP TABLE IF EXISTS `subtema_subtema`;
+CREATE TABLE IF NOT EXISTS `subtema_subtema` (
 `id_subtema` integer(6) NOT NULL,
 `id_subtema_subtema` integer(6) NOT NULL,
 PRIMARY KEY (`id_subtema`, `id_subtema_subtema`),
@@ -88,7 +100,8 @@ FOREIGN KEY ( `id_subtema` ) REFERENCES `subtema` ( `id` ) ON DELETE CASCADE ON 
 FOREIGN KEY ( `id_subtema_subtema` ) REFERENCES `subtema` ( `id` ) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NO EXISTS`actividad` (
+DROP TABLE IF EXISTS `actividad`;
+CREATE TABLE IF NOT EXISTS `actividad` (
 `id` int(6) NOT NULL,
 `id_tema` int(6) NOT NULL,
 `tipo_usuario` varchar(20) NOT NULL,
@@ -102,7 +115,8 @@ PRIMARY KEY (`id`),
 FOREIGN KEY ( `id_tema` ) REFERENCES `tema` ( `id` ) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NO EXISTS`asignatura_usuario` (
+DROP TABLE IF EXISTS `asignatura_usuario`;
+CREATE TABLE IF NOT EXISTS `asignatura_usuario` (
 `cedula_usuario` int(10) NOT NULL,
 `nrc_asignatura` int(6) NOT NULL,
 `id_periodo` int(6) NOT NULL,
@@ -114,7 +128,8 @@ FOREIGN KEY ( `nrc_asignatura` ) REFERENCES `asignatura` ( `nrc` ) ON DELETE CAS
 FOREIGN KEY ( `id_periodo` ) REFERENCES `periodo` ( `id` ) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NO EXISTS`evaluacion` (
+DROP TABLE IF EXISTS `evaluacion`;
+CREATE TABLE IF NOT EXISTS `evaluacion` (
 `id` int(6) NOT NULL,
 `id_periodo` int(6) NOT NULL,
 `numero_semana` int(2) NOT NULL,
@@ -131,7 +146,8 @@ FOREIGN KEY ( `id_periodo` ) REFERENCES `periodo` ( `id` ) ON DELETE CASCADE ON 
 FOREIGN KEY ( `numero_semana` ) REFERENCES `semana` ( `numero` ) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NO EXISTS`tema_semana` (
+DROP TABLE IF EXISTS `tema_semana`;
+CREATE TABLE IF NOT EXISTS `tema_semana` (
 `id_tema` int(6) NOT NULL,
 `numero_semana` int(2) NOT NULL,
 `id_periodo` int(6) NOT NULL,
@@ -142,7 +158,8 @@ FOREIGN KEY ( `numero_semana` ) REFERENCES `semana` ( `numero` ) ON DELETE CASCA
 FOREIGN KEY ( `id_periodo` ) REFERENCES `periodo` ( `id` ) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NO EXISTS`tema_evaluacion` (
+DROP TABLE IF EXISTS `tema_evaluacion`;
+CREATE TABLE IF NOT EXISTS `tema_evaluacion` (
 `id_evaluacion` int(6) NOT NULL,
 `id_tema` int(6) NOT NULL,
 PRIMARY KEY (`id_evaluacion`, `id_tema`),
@@ -153,7 +170,8 @@ FOREIGN KEY ( `id_tema` ) REFERENCES `tema` ( `id` ) ON DELETE CASCADE ON UPDATE
 );
 
 
-CREATE TABLE IF NO EXISTS`evaluacion_usuario` (
+DROP TABLE IF EXISTS `evaluacion_usuario`;
+CREATE TABLE IF NOT EXISTS `evaluacion_usuario` (
 `cedula_usuario` int(10) NOT NULL,
 `id_tema` int(6) NOT NULL,
 `id_evaluacion` int(6) NOT NULL,
@@ -168,7 +186,8 @@ FOREIGN KEY ( `nrc_asignatura` ) REFERENCES `asignatura` ( `nrc` ) ON DELETE CAS
 
 );
 
-CREATE TABLE IF NO EXISTS`asistencia` (
+DROP TABLE IF EXISTS `asistencia`;
+CREATE TABLE IF NOT EXISTS `asistencia` (
 `cedula_usuario` int(10) NOT NULL,
 `nrc_asignatura` int(6) NOT NULL,
 `id_periodo` int(6) NOT NULL,
@@ -184,7 +203,8 @@ FOREIGN KEY ( `id_periodo` ) REFERENCES `periodo` ( `id` ) ON DELETE CASCADE ON 
 FOREIGN KEY ( `numero_semana` ) REFERENCES `semana` ( `numero` ) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NO EXISTS`horario` (
+DROP TABLE IF EXISTS `horario`;
+CREATE TABLE IF NOT EXISTS `horario` (
 `nrc_asignatura` int(6) NOT NULL,
 `dia` varchar(15) NOT NULL,
 `hora_inicio` time NOT NULL,
@@ -193,3 +213,5 @@ PRIMARY KEY (`nrc_asignatura`, `dia`),
 
 FOREIGN KEY ( `nrc_asignatura` ) REFERENCES `asignatura` ( `nrc` ) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+SET FOREIGN_KEY_CHECKS=1;
