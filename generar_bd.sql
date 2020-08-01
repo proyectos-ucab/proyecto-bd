@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS usuario;
 CREATE TABLE IF NOT EXISTS usuario (
 cedula INT NOT NULL,
 nombre varchar(30) NOT NULL,
-correo varchar(255) NOT NULL CHECK (correo LIKE '%est.ucab.edu.ve%' OR correo LIKE '%ucab.edu.ve%'),
+correo varchar(255) NOT NULL CHECK (correo LIKE '%est.ucab.edu.ve' OR correo LIKE '%ucab.edu.ve'),
 password varchar(255) NOT NULL, 
 role varchar(255) NULL,
 PRIMARY KEY (cedula),
