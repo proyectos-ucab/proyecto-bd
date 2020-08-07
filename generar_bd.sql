@@ -70,8 +70,8 @@ DROP TABLE IF EXISTS tema ;
 CREATE TABLE IF NOT EXISTS tema (
 id INT NOT NULL,
 nrc_asignatura INT NOT NULL,
-nombre varchar(60) NOT NULL,
-ponderacion INT NOT NULL,
+nombre varchar(150) NOT NULL,
+numero INT NOT NULL,
 PRIMARY KEY ( id ),
 
 FOREIGN KEY ( nrc_asignatura ) REFERENCES asignatura ( nrc ) ON DELETE CASCADE ON UPDATE CASCADE
@@ -91,14 +91,14 @@ FOREIGN KEY ( id_tema ) REFERENCES tema ( id ) ON DELETE CASCADE ON UPDATE CASCA
 DROP TABLE IF EXISTS subtema_subtema;
 
 CREATE TABLE IF NOT EXISTS subtema_subtema (
-id_subtema_uno INT NOT NULL,
-id_tema_uno INT NOT NULL,
-id_subtema_dos INT NOT NULL,
-id_tema_dos INT NOT NULL,
-PRIMARY KEY (id_subtema_uno, id_tema_uno, id_subtema_dos, id_tema_dos),
+id_tema INT NOT NULL,
+id_subtema INT NOT NULL,
+id INT NOT NULL,
+numero INT NOT NULL,
+descripcion TEXT NOT NULL,
+PRIMARY KEY (id_tema, id_subtema, id),
 
-FOREIGN KEY ( id_subtema_uno, id_subtema_dos ) REFERENCES subtema ( id, id_tema ) ON DELETE CASCADE ON UPDATE CASCADE,
-FOREIGN KEY ( id_subtema_uno, id_subtema_dos ) REFERENCES subtema ( id, id_tema ) ON DELETE CASCADE ON UPDATE CASCADE
+FOREIGN KEY ( id_subtema ,id_tema ) REFERENCES subtema ( id, id_tema ) ON DELETE CASCADE ON UPDATE CASCADE,
 );
 
 DROP TABLE IF EXISTS actividad;
