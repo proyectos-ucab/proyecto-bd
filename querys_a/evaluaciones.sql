@@ -9,8 +9,9 @@ INSERT INTO evaluacion VALUES(id,id_periodo,numero_semana,descripcion,ponderacio
 INSERT INTO tema_evaluacion VALUES ( id_evaluacion_creada, id_tema_dado ) 
 
 
--- seleccion de datos 
-SELECT (numero_semana,descripcion,ponderacion, plataforma,recurso,modalidad,frecuencia,fecha,hora)
+-- seleccion de datos lo que vi en figma que es el numero de tema, semana, descripcion hora y fecha
+/* ten en cuenta que en el arreglo se crearan n tuplas dependediendo de la cantidad de temas numero de tema, porque cada numero es una tupla es decir fila*/
+SELECT (evaluacion.numero_semana,evaluacion.descripcion,evaluacion.ponderacion,evaluacion.fecha,evaluacion.hora,tema.numero)
   FROM evaluacion,asignatura, tema_evaluacion
     Where(evaluacion.id ="id_evaluacion_dado")AND
          (evaluacion.id = tema_evaluacion.id_evaluacion) AND
