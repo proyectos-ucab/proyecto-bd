@@ -190,10 +190,10 @@ CREATE TABLE IF NOT EXISTS asistencia (
 cedula_usuario INT NOT NULL,
 nrc_asignatura INT NOT NULL,
 id_periodo INT NOT NULL,
-numero_semana INT NOT NULL,
+numero_semana INT,
 hora time NOT NULL,
 fecha date NOT NULL,
-asistente INT NOT NULL,
+asistente VARCHAR ( 2 ),
 PRIMARY KEY (cedula_usuario, nrc_asignatura, id_periodo, numero_semana),
 
 FOREIGN KEY ( cedula_usuario ) REFERENCES usuario ( cedula ) ON DELETE CASCADE ON UPDATE CASCADE,
