@@ -2,7 +2,7 @@
 -- CRUD normal
 
 -- CREAR 
-INSERT INTO evaluacion VALUES(id,id_periodo,numero_semana,descripcion,ponderacion,plataforma,recurso,modalidad,frecuencia,fecha,hora)
+INSERT INTO evaluacion VALUES(id,id_periodo,numero_semana,descripcion,ponderacion,fecha,hora)
 
 --SE DEBE INSERTAR EN TEMA_EVALUACION
 
@@ -19,7 +19,7 @@ SELECT (evaluacion.numero_semana,evaluacion.descripcion,evaluacion.ponderacion,e
          (tema.nrc_asignatura = "id_asignatura_dado");
          
 -- actualizar
-UPDATE evaluacion SET numero_semana= , descripcion = "",ponderacion = ,,fecha = "",hora = "")
+UPDATE evaluacion SET numero_semana= , descripcion = "",ponderacion = , fecha = "",hora = "")
     Where(evaluacion.id ="id_evaluacion_dado")AND
          (evaluacion.id = tema_evaluacion.id_evaluacion) AND
          (tema_evaluacion.id_tema ="id_tema_dado")AND
@@ -42,7 +42,7 @@ SELECT (tema.id,tema.nombre)
          (tema.nrc_asignatura = "id_asignatura_dado");
          
 -- Seleccion de datos por fecha
-SELECT (numero_semana,descripcion,ponderacion, plataforma,recurso,modalidad,frecuencia,fecha,hora)
+SELECT (numero_semana,descripcion,ponderacion,fecha,hora)
   FROM evaluacion,asignatura, tema_evaluacion
     Where(evaluacion.fecha = "fecha_dada")AND  
          (evaluacion.id ="id_evaluacion_dado")AND
