@@ -19,7 +19,7 @@ SELECT (evaluacion.numero_semana,evaluacion.descripcion,evaluacion.ponderacion,e
          (tema.nrc_asignatura = "id_asignatura_dado");
          
 -- actualizar
-UPDATE evaluacion SET numero_semana= , descripcion = "",ponderacion = ,plataforma = "",recurso = "",modalidad = "",frecuencia = "",fecha = "",hora = "")
+UPDATE evaluacion SET numero_semana= , descripcion = "",ponderacion = ,,fecha = "",hora = "")
     Where(evaluacion.id ="id_evaluacion_dado")AND
          (evaluacion.id = tema_evaluacion.id_evaluacion) AND
          (tema_evaluacion.id_tema ="id_tema_dado")AND
