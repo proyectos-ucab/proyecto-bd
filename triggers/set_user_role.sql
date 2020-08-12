@@ -1,16 +1,7 @@
-DROP TRIGGER IF EXISTS set_user_role;
 
-CREATE TRIGGER set_user_role 
-	BEFORE INSERT ON usuario 
-	FOR EACH ROW
-BEGIN
+DROP TRIGGER IF EXISTS set_user_role_trigger ON usuario;
 
-	IF (NEW.correo LIKE '%est%') THEN
-		SET NEW.role = "EST";
-	ELSEIF (NEW.correo LIKE "%admin%") THEN
-		SET NEW.role = "ADM";
-	ELSE 
-		SET NEW.role = "PRO";
-  END IF;
-	 
-END
+CREATE TRIGGER set_user_role_trigger 
+BEFORE INSERT 
+ON usuario FOR EACH ROW 
+EXECUTE PROCEDURE set_user_role();
