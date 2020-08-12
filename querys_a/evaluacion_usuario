@@ -1,0 +1,61 @@
+CREATE TABLE IF NOT EXISTS evaluacion_usuario (
+cedula_usuario INT NOT NULL,
+id_tema INT NOT NULL,
+id_evaluacion INT NOT NULL,
+nrc_asignatura INT NOT NULL,
+nota INT NOT NULL,
+PRIMARY KEY (cedula_usuario, id_tema, id_evaluacion, nrc_asignatura),
+
+FOREIGN KEY ( cedula_usuario ) REFERENCES usuario ( cedula ) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY ( id_tema ) REFERENCES tema ( id ) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY ( id_evaluacion ) REFERENCES evaluacion ( id ) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY ( nrc_asignatura ) REFERENCES asignatura ( nrc ) ON DELETE CASCADE ON UPDATE CASCADE
+
+-- CREAR 
+INSERT INTO evaluacion_usuario VALUES (cedula_usuario, id_tema, id_evaluacion, nrc_asignatura , nota
+
+
+-- actualizar toda un lista de una misma asigna
+UPDATE evaluacion_usuario SET nota =
+  WHERE (evaluacion_usuario.cedula_usuario= cedula_dada) AND
+        (evaluacion_usuario.id_evaluacion= id_evaluacion)AND
+        (evaluacion_usuario.nrc_asignatura= nrc_asignatura_Dado);
+-eliminar         
+DELETE evaluacion_usuario
+  WHERE (evaluacion_usuario.cedula_usuario= cedula_dada) AND
+        (evaluacion_usuario.id_evaluacion= id_evaluacion)AND
+        (evaluacion_usuario.nrc_asignatura= nrc_asignatura_Dado);
+         
+-- CONSULTA DE PANTALLA QUE COMPARTE UNA MISM ASIGANTURA Y ID DE EVALUACION
+-- titulo
+-- todos los temas de una evaluacion
+SELECT (evaluacion.descripcion,tema.numero,evaluacion.ponderacion)
+  FROM tema, tema_evaluacion, evaluacion
+    WHERE (tema.nrc_asignatura = nrc_dado)AND
+          (evaluacion_usuario.nrc_asignatura = tema.nrc_asignatura)AND
+          
+          (tema.id = id_tema_dado) AND
+          (evaluacion_usuario.id_tema = tema.id)AND
+          (tema_evaluacion.id_tema = evaluacion.id_tema)AND
+          
+          (evaluacion.id = Id_evaluacion_dado)AND
+          (evaluacion.id = tema_evaluacion.id_evalucion );
+     
+   -- tabla
+  
+SELECT (usuario.cedula ,usuario.nombre,usuario.correo,evaluacion_usuario.nota)
+  FROM   evaluacion, evaluacion_usuario, usuario, tema_evaluacion
+    WHERE (evaluacion_usuario.nrc_asignatura = nrc_dado)AND
+    
+          (evaluacion_usuario.id_tema = id_tema_dado)AND
+          (evaluacion_usuario.id_tema = tema_evaluacion.id_tema) AND
+          
+          (evaluacion_usuario.id_evaluacion = id_evaluacion_dada)AND
+          ( evaluacion_usuario.id_evaluacion = tema_evaluacion.id_evaluacion)AND
+         
+          (evaluacion_usuario.cedula_usuario = cedula_dadd)AND
+          (evaluacion_usuario.cedula_usuario = usuario.cedula)
+          
+          );
+          
+
