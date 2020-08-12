@@ -81,30 +81,31 @@ DROP TABLE IF EXISTS subtema;
 CREATE TABLE IF NOT EXISTS subtema (
 id INT NOT NULL,
 id_tema INT NOT NULL,
-numero INT NOT NULL,
+parent INT ,
+numero INT ,
 nombre text NOT NULL,
 PRIMARY KEY (id, id_tema),
 
 FOREIGN KEY ( id_tema ) REFERENCES tema ( id ) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS subtema_subtema;
+-- DROP TABLE IF EXISTS subtema_subtema;
 
-CREATE TABLE IF NOT EXISTS subtema_subtema (
-id_tema INT NOT NULL,
-id_subtema INT NOT NULL,
-id INT NOT NULL,
-numero INT NOT NULL,
-descripcion TEXT NOT NULL,
-PRIMARY KEY (id_tema, id_subtema, id),
+-- CREATE TABLE IF NOT EXISTS subtema_subtema (
+-- id INT NOT NULL,
+-- id_tema INT NOT NULL,
+-- id_subtema INT NOT NULL,
+-- numero INT NOT NULL,
+-- descripcion TEXT NOT NULL,
+-- PRIMARY KEY (id_tema, id_subtema, id),
 
-FOREIGN KEY ( id_subtema ,id_tema ) REFERENCES subtema ( id, id_tema ) ON DELETE CASCADE ON UPDATE CASCADE,
-);
+-- FOREIGN KEY ( id_subtema , id_tema ) REFERENCES subtema ( id, id_tema ) ON DELETE CASCADE ON UPDATE CASCADE
+-- );
 
 DROP TABLE IF EXISTS actividad;
 CREATE TABLE IF NOT EXISTS actividad (
 id INT NOT NULL,
-id_tema INT NOT NULL,
+nrc INT NOT NULL,
 tipo_usuario varchar(20) NOT NULL,
 descripcion varchar(150) NOT NULL,
 plataforma varchar(50) NOT NULL,
@@ -113,7 +114,6 @@ frecuencia varchar(50) NOT NULL,
 modalidad varchar(50) NOT NULL,
 PRIMARY KEY (id),
 
-FOREIGN KEY ( id_tema ) REFERENCES tema ( id ) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS asignatura_usuario;
